@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>conpinion-profile-menu attributes tests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <script src='../lib/webcomponentsjs/webcomponents-lite.min.js'></script>
+  <script src="../lib/web-component-tester/browser.js"></script>
+  <script src="../lib/test-fixture/test-fixture-mocha.js"></script>
+  <script src="../lib/jquery/dist/jquery.js"></script>
+  <script src="../lib/coffee-script/extras/coffee-script.js"></script>
+  <script src="../lib/simulant/dist/simulant.js"></script>
+  <link rel="import" href="../lib/test-fixture/test-fixture.html">
+  <link rel="import" href="../build/conpinion-profile-menu.html">
+</head>
+
+<body>
+
+  <test-fixture id="element">
+    <template>
+      <conpinion-profile-menu label="A. Alice"></conpinion-profile-menu>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="elementClickProfileItem">
+    <template>
+      <conpinion-profile-menu id="elementClickProfileItem"></conpinion-profile-menu>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="elementClickAccountItem">
+    <template>
+      <conpinion-profile-menu id="elementClickAccountItem"></conpinion-profile-menu>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="elementClickLogoutItem">
+    <template>
+      <conpinion-profile-menu id="elementClickLogoutItem"></conpinion-profile-menu>
+    </template>
+  </test-fixture>
+
+  <script type="text/coffeescript">
+
+    element = null
+
+    describe 'clicking the profile menu', ->
+
+      beforeEach -> element = fixture 'element'
+
+      it 'should open a dropdown menu', (done) ->
+        dropdown = element.querySelector('iron-dropdown')
+        handler = ->
+          dropdown.removeEventListener 'iron-overlay-opened', handler
+          done()
+        dropdown.addEventListener 'iron-overlay-opened', handler
+        simulant.fire element.querySelector('conpinion-circular-image-button'), 'tap'
+
+    describe 'clicking the profile menu item', ->
+
+      beforeEach -> element = fixture 'elementClickProfileItem'
+
+      it 'should fire a conpinion-profile-menu-profile event', (done) ->
+        element.addEventListener 'conpinion-profile-menu-profile', -> done()
+        simulant.fire element.querySelector('conpinion-circular-image-button'), 'tap'
+        simulant.fire element.querySelector('#profile'), 'tap'
+
+    describe 'clicking the account menu item', ->
+
+      beforeEach -> element = fixture 'elementClickAccountItem'
+
+      it 'should fire a conpinion-profile-menu-account event', (done) ->
+        element.addEventListener 'conpinion-profile-menu-account', -> done()
+        simulant.fire element.querySelector('conpinion-circular-image-button'), 'tap'
+        simulant.fire element.querySelector('#account'), 'tap'
+
+    describe 'clicking the logout menu item', ->
+
+      beforeEach -> element = fixture 'elementClickLogoutItem'
+
+      it 'should fire a conpinion-profile-menu-logout event', (done) ->
+        element.addEventListener 'conpinion-profile-menu-logout', -> done()
+        simulant.fire element.querySelector('conpinion-circular-image-button'), 'tap'
+        simulant.fire element.querySelector('#logout'), 'tap'
+
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+
+<!--
+Copyright (c) 2015 TELCAT MULTICOM GmbH. All rights reserved.
+Copyright (c) 2016 conpinion GbR. All rights reserved.
+
+Element: conpinion-profile-menu
+Version: 0.2.1
+Description: A profile menu component
+-->
+
+
+<link rel="import" href="../iron-dropdown/iron-dropdown.html">
+<link rel="import" href="../paper-material/paper-material.html">
+<link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../paper-menu/paper-menu.html">
+<link rel="import" href="../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../conpinion-circular-image-button/conpinion-circular-image-button.html">
+
+<dom-module id="conpinion-profile-menu">
+
+  <template>
+<style>paper-item {
+  white-space: nowrap;
+  cursor: pointer;
+}
+paper-item:hover {
+  background-color: #eee;
+}
+paper-item.iron-selected {
+  font-weight: normal !important;
+}
+conpinion-circular-image-button {
+  vertical-align: middle;
+}
+conpinion-circular-image-button + span {
+  margin-left: 0.5em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+</style>
+
+    <paper-menu-button>
+      <div id="profileIconLabel" class="dropdown-trigger">
+        <conpinion-circular-image-button mini src="[[imageSrc]]"></conpinion-circular-image-button>
+        <span>[[label]]</span>
+      </div>
+      <paper-menu class="dropdown-content">
+        <paper-item id="profile" on-tap="_profile">Profil</paper-item>
+        <paper-item id="account" on-tap="_account">Account</paper-item>
+        <content select="paper-item"></content>
+        <paper-item id="logout" on-tap="_logout">Abmelden</paper-item>
+      </paper-menu>
+    </paper-menu-button>
+
+  </template>
+
+<script type="text/javascript">(function() {
+  Polymer({
+    is: 'conpinion-profile-menu',
+    properties: {
+      imageSrc: {
+        type: String
+      },
+      label: {
+        type: String
+      }
+    },
+    _profile: function() {
+      return this.fire('conpinion-profile-menu-profile');
+    },
+    _account: function() {
+      return this.fire('conpinion-profile-menu-account');
+    },
+    _logout: function() {
+      return this.fire('conpinion-profile-menu-logout');
+    }
+  });
+
+}).call(this);
+</script>
+
+</dom-module>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>conpinion-profile-menu web component</title>
+  <script src='lib/webcomponentsjs/webcomponents.js'></script>
+  <link rel="import" href="lib/paper-item/paper-item.html">
+  <link rel="import" href="build/conpinion-profile-menu.html">
+</head>
+
+<body>
+
+  <h1>conpinion-profile-menu web component</h1>
+
+  <h2>This component contains a profile button and a dropdown menu</h2>
+
+  <p>
+    <a href="test/index.html">Click here to run the tests...</a>
+  </p>
+
+  <p>
+    <a href="README.md">Click here to read the documentation...</a>
+  </p>
+
+  <p>
+    <a href="CHANGELOG.md">Click here to read the changelog...</a>
+  </p>
+
+  <h2>Demo</h2>
+
+  <template is="dom-bind">
+
+    <conpinion-profile-menu image-src="test/profile.png" label="A. Alice"
+                         on-conpinion-profile-menu-profile="editProfile"
+                         on-conpinion-profile-menu-account="editAccount"
+                         on-conpinion-profile-menu-logout="logout">
+      <paper-item on-tap="customItem">Custom item</paper-item>
+    </conpinion-profile-menu>
+
+    <div id="messages"></div>
+
+  </template>
+
+  <script>
+    var t = document.querySelector('template');
+    t.editProfile = function() {
+      document.querySelector('#messages').innerHTML += '<div>show a profile dialog</div>'
+    };
+    t.editAccount = function() {
+      document.querySelector('#messages').innerHTML += '<div>show an account dialog</div>'
+    };
+    t.logout = function() {
+      document.querySelector('#messages').innerHTML += '<div>logout</div>'
+    };
+    t.customItem = function() {
+      document.querySelector('#messages').innerHTML += '<div>custom item selected</div>'
+    };
+  </script>
+
+  <script src="//localhost:35729/livereload.js"></script>
+
+</body>
+
+</html>

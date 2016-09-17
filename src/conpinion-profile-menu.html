@@ -1,0 +1,43 @@
+<!-- build:process -->
+<!--
+<%= copyright %>
+Element: <%= pkg.name %>
+Version: <%= pkg.version %>
+Description: <%= pkg.description %>
+-->
+<!-- /build -->
+
+<link rel="import" href="../lib/iron-dropdown/iron-dropdown.html">
+<link rel="import" href="../lib/paper-material/paper-material.html">
+<link rel="import" href="../lib/paper-item/paper-item.html">
+<link rel="import" href="../lib/paper-menu/paper-menu.html">
+<link rel="import" href="../lib/paper-menu-button/paper-menu-button.html">
+<link rel="import" href="../lib/conpinion-circular-image-button/conpinion-circular-image-button.html">
+
+<dom-module id="conpinion-profile-menu">
+
+  <template>
+    <!-- build:style inline conpinion-profile-menu -->
+    <link rel="stylesheet" href="conpinion-profile-menu.css">
+    <!-- /build -->
+
+    <paper-menu-button>
+      <div id="profileIconLabel" class="dropdown-trigger">
+        <conpinion-circular-image-button mini src="[[imageSrc]]"></conpinion-circular-image-button>
+        <span>[[label]]</span>
+      </div>
+      <paper-menu class="dropdown-content">
+        <paper-item id="profile" on-tap="_profile">Profil</paper-item>
+        <paper-item id="account" on-tap="_account">Account</paper-item>
+        <content select="paper-item"></content>
+        <paper-item id="logout" on-tap="_logout">Abmelden</paper-item>
+      </paper-menu>
+    </paper-menu-button>
+
+  </template>
+
+  <!-- build:script inline conpinion-profile-menu -->
+  <script src="conpinion-profile-menu.js"></script>
+  <!-- /build -->
+
+</dom-module>
